@@ -1,0 +1,27 @@
+2023-04-10 04:38:36.206 [info] Log level: Info
+2023-04-10 04:38:36.206 [info] Validating found git in: "git"
+2023-04-10 04:38:36.206 [info] Using git "2.25.1" from "git"
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [29ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --git-dir --git-common-dir [4ms]
+2023-04-10 04:38:36.206 [info] Open repository: /home/cms-jovyan
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [7ms]
+2023-04-10 04:38:36.206 [info] > git config --get commit.template [7ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [8ms]
+2023-04-10 04:38:36.206 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [7ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [9ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [24ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [3ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [2ms]
+2023-04-10 04:38:36.206 [info] > git rev-parse --show-toplevel [4ms]
+2023-04-10 04:38:36.207 [info] > git rev-parse --show-toplevel [1ms]
+2023-04-10 04:38:36.207 [info] > git rev-parse --show-toplevel [2ms]
+2023-04-10 04:38:36.207 [info] > git rev-parse --show-toplevel [2ms]
+2023-04-10 04:38:36.207 [info] > git rev-parse --show-toplevel [2ms]
+2023-04-10 04:38:36.207 [info] > git status -z -uall [106ms] (cancelled)
+2023-04-10 04:38:36.485 [info] > git check-ignore -v -z --stdin [4ms]
+2023-04-10 04:38:37.517 [info] > git check-ignore -v -z --stdin [2ms]
+2023-04-10 04:38:38.504 [info] > git check-ignore -v -z --stdin [3ms]
+2023-04-10 04:38:52.935 [info] > git config --get commit.template [844ms]
+2023-04-10 04:38:52.975 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/master refs/remotes/master [5ms]
+2023-04-10 04:38:53.195 [info] > git status -z -uall [207ms] (cancelled)
+2023-04-10 04:39:03.130 [info] > git check-ignore -v -z --stdin [2ms]

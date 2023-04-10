@@ -1,0 +1,108 @@
+2023-04-10 04:38:35.465 [info] Extension host with pid 973 started
+2023-04-10 04:38:35.530 [info] Lock '/home/cms-jovyan/.vscode-server/data/User/workspaceStorage/fb730b622f7b921edf2cc9ce8c72afe9/vscode.lock': Lock acquired.
+2023-04-10 04:38:35.610 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2023-04-10 04:38:35.673 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2023-04-10 04:38:35.673 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2023-04-10 04:38:35.849 [info] Eager extensions activated
+2023-04-10 04:38:35.849 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2023-04-10 04:38:35.850 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2023-04-10 04:38:44.493 [info] ExtensionService#_doActivateExtension vscode.ipynb, startup: false, activationEvent: 'onNotebookSerializer:jupyter-notebook'
+2023-04-10 04:38:45.580 [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-04-10 04:38:45.580 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-cell-tags, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-04-10 04:38:45.580 [info] ExtensionService#_doActivateExtension ms-toolsai.vscode-jupyter-slideshow, startup: false, activationEvent: 'onNotebook:jupyter-notebook'
+2023-04-10 04:38:45.581 [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter-renderers, startup: false, activationEvent: 'onNotebook:*'
+2023-04-10 04:38:46.150 [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'api', root cause: ms-toolsai.jupyter
+2023-04-10 04:38:47.215 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2023-04-10 04:38:48.919 [info] ExtensionService#_doActivateExtension ms-python.vscode-pylance, startup: false, activationEvent: 'onLanguage:python'
+2023-04-10 04:38:52.052 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10000
+2023-04-10 04:38:53.176 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10007
+2023-04-10 04:38:54.243 [error] Error: Module 'pip' not installed.
+	at au.execModule (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:7:27794)
+	at async Kd.getPackageInformation (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:7:19123)
+2023-04-10 04:39:12.459 [error] Canceled: Canceled
+	at Bb.selectLocalKernel (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:24:213830)
+	at async Jb.onSelectLocalKernel (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:24:222791)
+	at async m.h (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:125789) jupyter.kernel.selectLocalPythonEnvironment {"value":"ms-toolsai.jupyter","c":"ms-toolsai.jupyter"}
+2023-04-10 04:39:13.461 [error] {}
+2023-04-10 04:45:01.341 [error] Error: Module 'pip' not installed.
+	at au.execModule (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:7:27794)
+	at processTicksAndRejections (node:internal/process/task_queues:96:5)
+	at async Kd.getPackageInformation (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:7:19123)
+2023-04-10 04:45:21.427 [info] Extension host terminating: received terminate message from renderer
+2023-04-10 04:45:21.429 [info] Lock '/home/cms-jovyan/.vscode-server/data/User/workspaceStorage/fb730b622f7b921edf2cc9ce8c72afe9/vscode.lock': Marking the lockfile as scheduled to be released in 6000 ms.
+2023-04-10 04:45:21.461 [error] Canceled: Canceled
+	at Object.k [as canceled] (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:7:1192)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:109:8301
+	at Array.forEach (<anonymous>)
+	at c.dispose (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:109:8266)
+	at E.terminate (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:111:9366)
+	at d.terminate (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:115:1544)
+	at p (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:125:18690)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:125:16600
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at p.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:14916)
+	at s.E (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:18982)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:16970
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at d.acceptChunk (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:12647)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:11934
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at n.u (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:28899) notebook.selectKernel undefined
+2023-04-10 04:45:21.462 [error] Canceled: Canceled
+	at new l (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:105190)
+	at c.O (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:109:11692)
+	at Proxy.G.<computed>.Q.charCodeAt.G.<computed> (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:109:8967)
+	at m.g (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:125211)
+	at m.executeCommand (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:124587)
+	at L.registerCommand.description (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:123880)
+	at m.h (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:125797)
+	at m.g (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:124687)
+	at m.executeCommand (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:99:124587)
+	at Object.executeCommand (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:115:23801)
+	at D (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/extensions/git/dist/main.js:2:1467156)
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at Object.m [as dispose] (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/extensions/git/dist/main.js:2:1481885)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/extensions/git/dist/main.js:2:1485952
+	at Array.forEach (<anonymous>)
+	at g.dispose (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/extensions/git/dist/main.js:2:1485938)
+	at t.<anonymous> (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:97:12398)
+	at t.dispose (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:97:12533)
+	at t.<anonymous> (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/extensions/git/dist/main.js:2:1469286)
+	at t.dispose (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:97:12533)
+	at I (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:10:12084)
+	at E.Y (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:111:11147)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:111:9131
+	at Array.map (<anonymous>)
+	at E.R (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:111:9118)
+	at E.terminate (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:111:9389)
+	at d.terminate (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:115:1544)
+	at p (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:125:18690)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:125:16600
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at p.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:14916)
+	at s.E (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:18982)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:16970
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at d.acceptChunk (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:12647)
+	at /home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:11934
+	at E.invoke (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:145)
+	at h.deliver (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:2121)
+	at n.fire (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:63:1729)
+	at n.u (/home/cms-jovyan/.vscode-server/bin/b7886d7461186a5eac768481578c1d7ca80e2d21/out/vs/workbench/api/node/extensionHostProcess.js:72:28899) setContext undefined
+2023-04-10 04:45:21.462 [error] Error: The kernel died. Error: /bin/python3: No module named ipykernel_launcher... View Jupyter [log](command:jupyter.viewOutput) for further details.
+	at ChildProcess.<anonymous> (/home/cms-jovyan/.vscode-server/extensions/ms-toolsai.jupyter-2023.3.1000892223/out/extension.node.js:17:58325)
+	at ChildProcess.emit (node:events:538:35)
+	at Process.ChildProcess._handle.onexit (node:internal/child_process:291:12)
+2023-04-10 04:45:21.472 [info] Extension host with pid 973 exiting with code 0
