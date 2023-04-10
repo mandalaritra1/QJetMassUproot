@@ -228,15 +228,15 @@ class QJetMassProcessor(processor.ProcessorABC):
             ### Events with at least one gen jet
             #####################################
             sel.add("oneGenJet", 
-                  ak.sum( (events.GenJet.pt > 120.) & (np.abs(events.GenJet.eta) < 2.5), axis=1 ) >= 1
+                  ak.sum( (events.GenJet.pt > 5.) & (np.abs(events.GenJet.eta) < 2.5), axis=1 ) >= 1
             )
-            events.GenJet = events.GenJet[(events.GenJet.pt > 120.) & (np.abs(events.GenJet.eta) < 2.5)]
+            events.GenJet = events.GenJet[(events.GenJet.pt > 5.) & (np.abs(events.GenJet.eta) < 2.5)]
 
             #####################################
             ### Make gen-level Z
             #####################################
             z_gen = get_z_gen_selection(events, sel, self.lepptcuts[0], self.lepptcuts[1] )
-            z_ptcut_gen = ak.where( sel.all("twoGen_leptons") & ~ak.is_none(z_gen),  z_gen.pt > 120., False )
+            z_ptcut_gen = ak.where( sel.all("twoGen_leptons") & ~ak.is_none(z_gen),  z_gen.pt > 20., False )
             z_mcut_gen = ak.where( sel.all("twoGen_leptons") & ~ak.is_none(z_gen),  (z_gen.mass > 80.) & (z_gen.mass < 110), False )
             sel.add("z_ptcut_gen", z_ptcut_gen)
             sel.add("z_mcut_gen", z_mcut_gen)
@@ -343,7 +343,7 @@ class QJetMassProcessor(processor.ProcessorABC):
         ### Make reco-level Z
         #####################################
         z_reco = get_z_reco_selection(events, sel, self.lepptcuts[0], self.lepptcuts[1])
-        z_ptcut_reco = z_reco.pt > 170.
+        z_ptcut_reco = z_reco.pt > 20.
         z_mcut_reco = (z_reco.mass > 80.) & (z_reco.mass < 110.)
         sel.add("z_ptcut_reco", z_ptcut_reco)
         sel.add("z_mcut_reco", z_mcut_reco)
@@ -351,9 +351,9 @@ class QJetMassProcessor(processor.ProcessorABC):
         #####################################
         ### Reco jet selection
         #####################################
-        recojets = events.Jet[(events.Jet.pt > 170.) & (np.abs(events.Jet.eta) < 2.5)]
+        recojets = events.Jet[(events.Jet.pt > 20.) & (np.abs(events.Jet.eta) < 2.5)]
         sel.add("oneRecoJet", 
-             ak.sum( (events.Jet.pt > 170.) & (np.abs(events.Jet.eta) < 2.5), axis=1 ) >= 1
+             ak.sum( (events.Jet.pt > 20.) & (np.abs(events.Jet.eta) < 2.5), axis=1 ) >= 1
         )
         
         #####################################
