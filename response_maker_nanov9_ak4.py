@@ -43,8 +43,8 @@ def response_maker_nanov9(testing=False, do_gen=True, client=None, prependstr = 
         if do_gen: 
             chunksize = 1000
         else:
-            chunksize=1000000
-        maxchunks = 10
+            chunksize=100000
+        maxchunks = 1
     fileset = {}
     if not testing: 
         

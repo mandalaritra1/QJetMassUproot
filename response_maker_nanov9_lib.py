@@ -189,7 +189,10 @@ class QJetMassProcessor(processor.ProcessorABC):
                 trigsel = events.HLT.IsoMu24 | events.HLT.Ele32_WPTight_Gsf | events.HLT.Photon200
             else:
                 raise Exception("Dataset is incorrect, should have 2016, 2017, 2018: ", dataset)
-            sel.add("trigsel", trigsel)    
+            sel.add("trigsel", trigsel)   
+            print("Here is sel")
+            print(trigsel)
+
         
         #####################################
         ### Remove events with very large gen weights (>2 sigma)

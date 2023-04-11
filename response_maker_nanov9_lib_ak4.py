@@ -145,11 +145,14 @@ class QJetMassProcessor(processor.ProcessorABC):
         #####################################
         #### Find the IOV from the dataset name
         #####################################
-        IOV = ('2016APV' if any(re.findall(r'APV', dataset))
-               else '2018' if any(re.findall(r'UL18', dataset))
-               else '2017' if any(re.findall(r'UL17', dataset))
+        IOV = ('2018' if any(re.findall(r'Test', dataset) )
+               else '2016APV'   if any(re.findall(r'APV',  dataset)) 
+               else '2018' if ( any(re.findall(r'UL18', dataset)) or any(re.findall(r'UL2018', dataset) ) )
+               else '2017' if ( any(re.findall(r'UL17', dataset)) or any(re.findall(r'UL2017', dataset) ) )
                else '2016')
         
+        #print("dataset ", dataset)
+        #print("IOV ", IOV)
 
         #####################################
         #### Find the era from the file name
@@ -190,6 +193,10 @@ class QJetMassProcessor(processor.ProcessorABC):
             else:
                 raise Exception("Dataset is incorrect, should have 2016, 2017, 2018: ", dataset)
             sel.add("trigsel", trigsel)    
+            
+            #print("Here is trigsel")
+            #print(sel.names)
+            #print(sel.require(trigsel = True))
         
         #####################################
         ### Remove events with very large gen weights (>2 sigma)
@@ -343,6 +350,9 @@ class QJetMassProcessor(processor.ProcessorABC):
         ### Make reco-level Z
         #####################################
         z_reco = get_z_reco_selection(events, sel, self.lepptcuts[0], self.lepptcuts[1])
+        
+
+        
         z_ptcut_reco = z_reco.pt > 20.
         z_mcut_reco = (z_reco.mass > 80.) & (z_reco.mass < 110.)
         sel.add("z_ptcut_reco", z_ptcut_reco)
