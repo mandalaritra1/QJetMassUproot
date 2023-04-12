@@ -22,8 +22,8 @@ class util_binning :
     Class to implement the binning schema for jet mass and pt 2d unfolding. The gen-level mass is twice as fine. 
     '''
     def __init__(self):
-        #self.ptreco_axis = hist.axis.Variable([200,260,350,460,550,650,760,13000], name="ptreco", label=r"p_{T,RECO} (GeV)")
-        self.ptreco_axis = hist.axis.Regular(60,0,600, name="ptreco", label=r"p_{T,RECO} (GeV)")   
+        self.ptreco_axis = hist.axis.Variable([10,20,30,40,50,60,70,80,90,100,120,140,160,200,7000], name="ptreco", label=r"p_{T,RECO} (GeV)")
+        #self.ptreco_axis = hist.axis.Regular(60,0,600, name="ptreco", label=r"p_{T,RECO} (GeV)")   
         self.mreco_axis = hist.axis.Variable([0,5,10,20,40,60,80,100,150,200,250,300,350,1000], name="mreco", label=r"m_{RECO} (GeV)")
         self.ptgen_axis = hist.axis.Variable([200,260,350,460,550,650,760,13000], name="ptgen", label=r"p_{T,RECO} (GeV)")                
         self.mgen_axis = hist.axis.Variable( [0,2.5,5,7.5,10,15,20,30,40,50,60,70,80,90,100,125,150,175,200,225,250,275,300,325,350,1000], name="mgen", label=r"Mass [GeV]")
