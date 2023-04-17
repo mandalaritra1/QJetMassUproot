@@ -8,13 +8,18 @@ class Histfit:
         self.binlength = binlength
         self.histList = histList
         self.N = len(histList)
+        
         self.gaussMeanList = np.zeros(self.N)
         self.gaussWidthList = np.zeros(self.N)
         self.gaussConstList = np.zeros(self.N)
         self.gaussMeanErrList = np.zeros(self.N)
+        
         self.bwMeanList = np.zeros(self.N)
         self.bwWidthList = np.zeros(self.N)
         self.bwConstList = np.zeros(self.N)
+        
+        self.gaussExpSigmaList = np.zeros(self.N)
+        
         for i in range(len(self.histList)):
             self.histList[i] = histList[i]/(np.sum(histList[i])*self.binlength)
     def gauss(self,x,  x0, sigma,a):
@@ -27,7 +32,23 @@ class Histfit:
         """
         #k = 2 * np.sqrt(2) * m0 * gamma * np.sqrt(m0**2 * (m0**2 + gamma**2))
         return k / ((x**2 - x0**2)**2 + (x**2)*gamma**2)
+    
+    def crystall_ball(self, x0, sigma, n, alpha, N):
+        A = ((n / np.abs(alpha))**n ) * np.exp( - (np.abs(alpha)**2) / 2   )
+        B = (n / np.abs(alpha)) - np.abs(alpha)
+        #N = 1 / (sigma * (C+D))
+        exp_part = N * np.exp (- ((x-x0)**2)/(2 * sigma**2) )
+        polyn_part = N * A * (B - ((x - x0)/sigma) )**(-n)
+        
+        return np.where( ((x - x0)/sigma) > -alpha , exp_part, polyn_part)
 
+    def gaussExp( self, x , x0 , sigma, k, N):
+    
+        A = N * np.exp( -0.5*( (x-x0)/sigma )**2)
+
+        B = N * np.exp( ( k**2/2) - k*((x-x0)/sigma) )
+
+        return np.where (  k < ((x-x0)/sigma)  , B, A)
     
     def fitGauss(self,hist):
         parameters, covariance = curve_fit(self.gauss, self.frac_values, hist,bounds = ([0.5,0.05,-5],[2,0.3,20]))
@@ -41,8 +62,16 @@ class Histfit:
         parameters, covariance = curve_fit(self.bw, self.frac_values, hist,bounds = ([0.5,0.05,-5],[2,0.3,5]))
         mean = parameters[0]
         sigma = parameters[1]
-        const = parameters[2]
-        return mean,sigma,const
+        k = parameters[2]
+        return mean,sigma,k
+    
+    def fitGaussExp(self, hist):
+        parameters, covariance = curve_fit(self.gaussExp, self.frac_values, hist)
+        mean = parameters[0]
+        sigma = parameters[1]
+        const = parameters[3]
+        k = parameters[2]
+        return mean,sigma,k, const
     
     def storeParameters(self):
         for i in range(len(self.histList)):
@@ -57,6 +86,12 @@ class Histfit:
             self.bwWidthList[i] = parameters[1]
             self.bwConstList[i] = parameters[2]
             
+            parameters1 = self.fitGaussExp(hist)
+            self.gaussExpSigmaList[i] = parameters1[1]
+            
+    def plotGaussExpParameters(self):
+        plt.plot(self.gaussExpSigmaList)
+        
     def plotGaussparameters(self):
         plt.figure(figsize = (16,5))
         plt.subplot(131)
@@ -85,6 +120,9 @@ class Histfit:
         plt.plot(10*np.arange(self.N),self.bwConstList)
         plt.xlabel("pt,GeV")
         plt.ylabel("Const")
+    
+
+     
     def showFit(self,n):
         parameters, covariance = curve_fit(self.gauss, self.frac_values, self.histList[n][0],bounds = ([0.5,0.05,0.2],[2,0.3,20])) #fitting
         parameters1, covariance1 = curve_fit(self.bw, self.frac_values, self.histList[n][0]) #fitting_bw
@@ -109,4 +147,18 @@ class Histfit:
 
         plt.plot(self.frac_values,self.histList[n][0], 'r',label = 'data')
         plt.legend()
-    
+        
+    def showFitTail(self, n):
+        parameters, covariance = curve_fit(self.gaussExp, self.frac_values, self.histList[n][0] ) #bounds = ([0.5,0.05,0.2,0.2],[2,0.3,20,20])
+        mean = parameters[0]
+        sigma = parameters[1]
+        const = parameters[3]
+        k = parameters[2]
+        
+        plt.figure(figsize = (8,5))    
+        fit_dist = self.gaussExp(self.frac_values,mean,sigma,k, const)
+        print(sigma)
+        plt.plot(self.frac_values,fit_dist,'b--',label = 'gaussExp fit')
+
+        plt.plot(self.frac_values,self.histList[n][0], 'r',label = 'data')
+        plt.legend()
