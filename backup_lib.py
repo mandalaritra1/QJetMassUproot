@@ -474,10 +474,8 @@ class QJetMassProcessor(processor.ProcessorABC):
                     
                     
             #The new 3 plots
-            self.hists["pt_jet_over_z_gen"].fill( dataset = dataset, ptreco = z_reco.pt, frac = gen_jet.pt / z_gen.pt , weight = weights)
+            self.hists["h_pt_jet_over_z_gen"].fill( dataset = dataset,ptreco = z_reco.pt, frac = gen_jet.pt/z_gen.pt, weight = weights)
             self.hists["pt_z_gen_over_reco"].fill(dataset = dataset, ptreco = z_reco.pt, frac = z_gen.pt/z_reco.pt, weight = weights )
-            self.hists["pt_jet_reco_over_gen"].fill(dataset = dataset, ptreco = z_reco.pt, frac = reco_jet.pt/gen_jet.pt, weight = weights )
-            
             
             #h_pt_z_gen_over_reco = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
 

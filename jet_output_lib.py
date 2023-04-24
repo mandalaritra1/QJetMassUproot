@@ -30,117 +30,22 @@ class QJetMassProcessor(processor.ProcessorABC):
         self.ptcut = ptcut
         self.etacut = etacut        
         self.lepptcuts = [ptcut_ee, ptcut_mm]
-                
-        binning = util_binning()
+        self.filename_gen = "genjet_data.csv"
+        self.filename_reco = "recojet_data.csv"
         
-        ptreco_axis = binning.ptreco_axis
-        mreco_axis = binning.mreco_axis
-        ptgen_axis = binning.ptgen_axis     
-        mgen_axis = binning.mgen_axis
-
-        dataset_axis = binning.dataset_axis
-        lep_axis = binning.lep_axis
-        n_axis = binning.n_axis
-        mass_axis = binning.mass_axis
-        zmass_axis = binning.zmass_axis
-        pt_axis = binning.pt_axis
-        frac_axis = binning.frac_axis
-        dr_axis = binning.dr_axis
-        dr_fine_axis = binning.dr_fine_axis
-        dphi_axis = binning.dphi_axis    
-        
-        ### Plots of things during the selection process / for debugging with fine binning
-        h_njet_gen = hist.Hist(dataset_axis, n_axis, storage="weight", label="Counts")
-        h_njet_reco = hist.Hist(dataset_axis, n_axis, storage="weight", label="Counts")
-        h_ptjet_gen_pre = hist.Hist(dataset_axis, pt_axis, storage="weight", label="Counts")
-        h_ptjet_reco_over_gen = hist.Hist(dataset_axis, frac_axis, storage="weight", label="Counts")
-        h_drjet_reco_gen = hist.Hist(dataset_axis, dr_fine_axis, storage="weight", label="Counts")
-        h_ptz_gen = hist.Hist(dataset_axis, pt_axis, storage="weight", label="Counts")
-        h_ptz_reco = hist.Hist(dataset_axis, pt_axis, storage="weight", label="Counts")        
-        h_mz_gen = hist.Hist(dataset_axis, zmass_axis, storage="weight", label="Counts")
-        h_mz_reco = hist.Hist(dataset_axis, zmass_axis, storage="weight", label="Counts")
-        h_mz_reco_over_gen = hist.Hist(dataset_axis, frac_axis, storage="weight", label="Counts")
-        h_dr_z_jet_gen = hist.Hist(dataset_axis, dr_axis, storage="weight", label="Counts")
-        h_dr_z_jet_reco = hist.Hist(dataset_axis, dr_axis, storage="weight", label="Counts")
-        h_dphi_z_jet_gen = hist.Hist(dataset_axis, dphi_axis, storage="weight", label="Counts")
-        h_dphi_z_jet_reco = hist.Hist(dataset_axis, dphi_axis, storage="weight", label="Counts")
-        h_ptasym_z_jet_gen = hist.Hist(dataset_axis, frac_axis, storage="weight", label="Counts")
-        h_ptasym_z_jet_reco = hist.Hist(dataset_axis, frac_axis, storage="weight", label="Counts")
-        h_ptfrac_z_jet_gen = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
-        h_ptfrac_z_jet_reco = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
-        h_dr_gen_subjet = hist.Hist(dataset_axis, dr_axis, storage="weight", label="Counts")
-        h_dr_reco_to_gen_subjet = hist.Hist(dataset_axis, dr_axis, storage="weight", label="Counts")
-        
-        #The new 3 plots
-        h_pt_jet_reco_over_gen = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
-        h_pt_jet_over_z_gen = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
-        h_pt_z_gen_over_reco = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
-        
-        ### Plots to be unfolded
-        h_ptjet_mjet_u_reco = hist.Hist(dataset_axis, ptreco_axis, mreco_axis, storage="weight", label="Counts")
-        h_ptjet_mjet_g_reco = hist.Hist(dataset_axis, ptreco_axis, mreco_axis, storage="weight", label="Counts")
-        ### Plots for comparison
-        h_ptjet_mjet_u_gen = hist.Hist(dataset_axis, ptgen_axis, mgen_axis, storage="weight", label="Counts")        
-        h_ptjet_mjet_g_gen = hist.Hist(dataset_axis, ptgen_axis, mgen_axis, storage="weight", label="Counts")
-        
-        
-        ### Plots to get JMR and JMS in MC
-        h_m_u_jet_reco_over_gen = hist.Hist(dataset_axis, ptgen_axis, mgen_axis, frac_axis, storage="weight", label="Counts")
-        h_m_g_jet_reco_over_gen = hist.Hist(dataset_axis, ptgen_axis, mgen_axis, frac_axis, storage="weight", label="Counts")
-        
-        ### Plots for the analysis in the proper binning
-        h_response_matrix_u = hist.Hist(dataset_axis,
-                                        ptreco_axis, mreco_axis, ptgen_axis, mgen_axis, 
-                                        storage="weight", label="Counts")
-        h_response_matrix_g = hist.Hist(dataset_axis,
-                                        ptreco_axis, mreco_axis, ptgen_axis, mgen_axis, 
-                                        storage="weight", label="Counts")
+        self.genjet_pt = np.array([0,])
+        self.recojet_pt = np.array([0])
         
         cutflow = {}
         
         self.hists = {
-            "njet_gen":h_njet_gen,
-            "njet_reco":h_njet_reco,
-            "ptjet_gen_pre":h_ptjet_gen_pre, 
-            "ptjet_mjet_u_gen":h_ptjet_mjet_u_gen, 
-            "ptjet_mjet_u_reco":h_ptjet_mjet_u_reco, 
-            "ptjet_mjet_g_gen":h_ptjet_mjet_g_gen, 
-            "ptjet_mjet_g_reco":h_ptjet_mjet_g_reco, 
-            "ptjet_reco_over_gen":h_ptjet_reco_over_gen,
-            "drjet_reco_gen":h_drjet_reco_gen,
-            "ptz_gen":h_ptz_gen,
-            "ptz_reco":h_ptz_reco,
-            "mz_gen":h_mz_gen,
-            "mz_reco":h_mz_reco,            
-            "mz_reco_over_gen":h_mz_reco_over_gen,
-            "dr_z_jet_gen":h_dr_z_jet_gen,
-            "dr_z_jet_reco":h_dr_z_jet_reco,            
-            "dphi_z_jet_gen":h_dphi_z_jet_gen,
-            "dphi_z_jet_reco":h_dphi_z_jet_reco,
-            "ptasym_z_jet_gen":h_ptasym_z_jet_gen,
-            "ptasym_z_jet_reco":h_ptasym_z_jet_reco,
-            "ptfrac_z_jet_gen":h_ptfrac_z_jet_gen,
-            "ptfrac_z_jet_reco":h_ptfrac_z_jet_reco,
-            "m_u_jet_reco_over_gen":h_m_u_jet_reco_over_gen,
-            "m_g_jet_reco_over_gen":h_m_g_jet_reco_over_gen,
-            "dr_gen_subjet":h_dr_gen_subjet,
-            "dr_reco_to_gen_subjet":h_dr_reco_to_gen_subjet,
-            "response_matrix_u":h_response_matrix_u,
-            "response_matrix_g":h_response_matrix_g,
-            
-            "pt_jet_reco_over_gen": h_pt_jet_reco_over_gen ,
-            "pt_jet_over_z_gen" :  h_pt_jet_over_z_gen,
-            "pt_z_gen_over_reco":  h_pt_z_gen_over_reco,
             "cutflow":cutflow
         }
-        
-        ## This is for rejecting events with large weights
         self.means_stddevs = defaultdict()
-    
     @property
     def accumulator(self):
         #return self._histos
-        return self.hists
+        return self.genjet_pt, self.recojet_pt
 
     
     # we will receive a NanoEvents instead of a coffea DataFrame
@@ -295,15 +200,7 @@ class QJetMassProcessor(processor.ProcessorABC):
             sel.add("kinsel_gen", kinsel_gen)
             toposel_gen = sel.require(z_pt_asym_sel_gen=True,z_jet_dphi_sel_gen=True)
             sel.add("toposel_gen", toposel_gen)
-            self.hists["ptz_gen"].fill(dataset=dataset,
-                                      pt=z_gen[kinsel_gen].pt,
-                                      weight=weights[kinsel_gen])
-            self.hists["mz_gen"].fill(dataset=dataset,
-                                      mass=z_gen[kinsel_gen].mass,
-                                      weight=weights[kinsel_gen])
-            self.hists["njet_gen"].fill(dataset=dataset,
-                                        n=ak.num(events[kinsel_gen].GenJet),
-                                        weight = weights[kinsel_gen] )
+
 
             # There are None elements in these arrays when the reco_jet is not found.
             # To make "N-1" plots, we need to reduce the size and remove the Nones
@@ -317,19 +214,6 @@ class QJetMassProcessor(processor.ProcessorABC):
             z_jet_dphi_sel_gen2 = z_jet_dphi_sel_gen[~ak.is_none(gen_jet) & kinsel_gen]
 
             # Making N-1 plots for these three
-            self.hists["dr_z_jet_gen"].fill( dataset=dataset,
-                                              dr=z_jet_dr_gen2[z_pt_asym_sel_gen2],
-                                              weight=weights2[z_pt_asym_sel_gen2])
-            self.hists["dphi_z_jet_gen"].fill(dataset=dataset, 
-                                               dphi=z_jet_dphi_gen2[z_pt_asym_sel_gen2], 
-                                               weight=weights2[z_pt_asym_sel_gen2])
-            self.hists["ptasym_z_jet_gen"].fill(dataset=dataset, 
-                                                 frac=z_pt_asym_gen2[z_jet_dphi_sel_gen2],
-                                                 weight=weights2[z_jet_dphi_sel_gen2])
-            self.hists["ptfrac_z_jet_gen"].fill(dataset=dataset, 
-                                                 ptreco=z_gen[z_jet_dphi_sel_gen2].pt,
-                                                 frac=z_pt_frac_gen2[z_jet_dphi_sel_gen2],
-                                                 weight=weights2[z_jet_dphi_sel_gen2])
 
             #####################################
             ### Get gen subjets 
@@ -343,15 +227,6 @@ class QJetMassProcessor(processor.ProcessorABC):
             allsel_gen = sel.all("kinsel_gen", "toposel_gen" )
             sel.add("allsel_gen", allsel_gen)
 
-            #####################################
-            ### Plots for gen jets and subjets
-            #####################################
-            self.hists["ptjet_gen_pre"].fill(dataset=dataset, 
-                                         pt=gen_jet[allsel_gen].pt, 
-                                         weight=weights[allsel_gen])
-            self.hists["dr_gen_subjet"].fill(dataset=dataset,
-                                             dr=groomed_gen_jet[allsel_gen].delta_r(gen_jet[allsel_gen]),
-                                             weight=weights[allsel_gen])
                         
             
         #####################################
@@ -407,13 +282,7 @@ class QJetMassProcessor(processor.ProcessorABC):
         sel.add("presel_reco", presel_reco)
         sel.add("allsel_reco", allsel_reco)
 
-        self.hists["mz_reco"].fill(dataset=dataset, mass=z_reco[presel_reco].mass, 
-                                   weight=weights[presel_reco])
-        if self.do_gen:
-            self.hists["mz_reco_over_gen"].fill(dataset=dataset, 
-                                                frac=z_reco[presel_reco].mass / z_gen[presel_reco].mass, 
-                                                weight=weights[presel_reco] )
-
+    
         # There are None elements in these arrays when the reco_jet is not found.
         # To make "N-1" plots, we need to reduce the size and remove the Nones
         # otherwise the functions will throw exception.
@@ -426,20 +295,6 @@ class QJetMassProcessor(processor.ProcessorABC):
         z_jet_dphi_reco3 = z_jet_dphi_reco[~ak.is_none(reco_jet)]
         z_jet_dphi_sel_reco3 = z_jet_dphi_sel_reco[~ak.is_none(reco_jet)]
         
-        # Making N-1 plots for these three
-        self.hists["dr_z_jet_reco"].fill( dataset=dataset,
-                                          dr=z_jet_dr_reco3[presel_reco3 & z_pt_asym_sel_reco3],
-                                          weight=weights3[presel_reco3 & z_pt_asym_sel_reco3])
-        self.hists["dphi_z_jet_reco"].fill(dataset=dataset, 
-                                           dphi=z_jet_dphi_reco3[presel_reco3 & z_pt_asym_sel_reco3], 
-                                           weight=weights3[presel_reco3 & z_pt_asym_sel_reco3])
-        self.hists["ptasym_z_jet_reco"].fill(dataset=dataset, 
-                                             frac=z_pt_asym_reco3[presel_reco3 & z_jet_dphi_sel_reco3],
-                                             weight=weights3[presel_reco3 & z_jet_dphi_sel_reco3])
-        self.hists["ptfrac_z_jet_reco"].fill(dataset=dataset, 
-                                             ptreco=z_reco[presel_reco3 & z_jet_dphi_sel_reco3].pt,
-                                             frac=z_pt_frac_reco3[presel_reco3 & z_jet_dphi_sel_reco3],
-                                             weight=weights3[presel_reco3 & z_jet_dphi_sel_reco3])
         
         #####################################
         ### Make final selection plots here
@@ -449,7 +304,7 @@ class QJetMassProcessor(processor.ProcessorABC):
         weights = weights[allsel_reco]
         z_reco = z_reco[allsel_reco]
         reco_jet = reco_jet[allsel_reco]
-        self.hists["ptjet_mjet_u_reco"].fill( dataset=dataset, ptreco=reco_jet.pt, mreco=reco_jet.mass, weight=weights )
+        # self.hists["ptjet_mjet_u_reco"].fill( dataset=dataset, ptreco=reco_jet.pt, mreco=reco_jet.mass, weight=weights )
         #self.hists["ptjet_mjet_g_reco"].fill( dataset=dataset, ptreco=reco_jet.pt, mreco=reco_jet.msoftdrop, weight=weights )
         
         if self.do_gen:
@@ -458,33 +313,35 @@ class QJetMassProcessor(processor.ProcessorABC):
             groomed_gen_jet = groomed_gen_jet[allsel_reco]
 
 
-            self.hists["ptjet_mjet_u_gen"].fill( dataset=dataset, ptgen=gen_jet.pt, mgen=gen_jet.mass, weight=weights )
-            self.hists["ptjet_mjet_g_gen"].fill( dataset=dataset, ptgen=gen_jet.pt, mgen=groomed_gen_jet.mass, weight=weights )
+#             self.hists["ptjet_mjet_u_gen"].fill( dataset=dataset, ptgen=gen_jet.pt, mgen=gen_jet.mass, weight=weights )
+#             self.hists["ptjet_mjet_g_gen"].fill( dataset=dataset, ptgen=gen_jet.pt, mgen=groomed_gen_jet.mass, weight=weights )
             
-            self.hists["drjet_reco_gen"].fill(dataset=dataset, dr=reco_jet.delta_r(gen_jet), weight=weights)
+#             self.hists["drjet_reco_gen"].fill(dataset=dataset, dr=reco_jet.delta_r(gen_jet), weight=weights)
             
         
-            self.hists["ptjet_reco_over_gen"].fill(dataset=dataset, frac=reco_jet.pt/gen_jet.pt, weight=weights)
-            self.hists["m_u_jet_reco_over_gen"].fill(dataset=dataset, 
-                                                     ptgen=gen_jet.pt, mgen = gen_jet.mass, 
-                                                     frac=reco_jet.mass/gen_jet.mass, weight=weights)
-            #self.hists["m_g_jet_reco_over_gen"].fill(dataset=dataset, 
-                                                     #ptgen=gen_jet.pt, mgen=groomed_gen_jet.mass,
-                                                     #frac=reco_jet.msoftdrop/groomed_gen_jet.mass, weight=weights)
+#             self.hists["ptjet_reco_over_gen"].fill(dataset=dataset, frac=reco_jet.pt/gen_jet.pt, weight=weights)
+#             self.hists["m_u_jet_reco_over_gen"].fill(dataset=dataset, 
+#                                                      ptgen=gen_jet.pt, mgen = gen_jet.mass, 
+#                                                      frac=reco_jet.mass/gen_jet.mass, weight=weights)
+#             #self.hists["m_g_jet_reco_over_gen"].fill(dataset=dataset, 
+#                                                      #ptgen=gen_jet.pt, mgen=groomed_gen_jet.mass,
+#                                                      #frac=reco_jet.msoftdrop/groomed_gen_jet.mass, weight=weights)
                     
                     
-            #The new 3 plots
-            self.hists["pt_jet_over_z_gen"].fill( dataset = dataset, ptreco = z_reco.pt, frac = gen_jet.pt / z_gen.pt , weight = weights)
-            self.hists["pt_z_gen_over_reco"].fill(dataset = dataset, ptreco = z_reco.pt, frac = z_gen.pt/z_reco.pt, weight = weights )
-            self.hists["pt_jet_reco_over_gen"].fill(dataset = dataset, ptreco = z_reco.pt, frac = reco_jet.pt/gen_jet.pt, weight = weights )
+#             #The new 3 plots
+#             self.hists["pt_jet_over_z_gen"].fill( dataset = dataset, ptreco = z_reco.pt, frac = gen_jet.pt / z_gen.pt , weight = weights)
+#             self.hists["pt_z_gen_over_reco"].fill(dataset = dataset, ptreco = z_reco.pt, frac = z_gen.pt/z_reco.pt, weight = weights )
             
-            
-            #h_pt_z_gen_over_reco = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
+#             #h_pt_z_gen_over_reco = hist.Hist(dataset_axis, ptreco_axis, frac_axis, storage="weight", label="Counts")
 
 
-            self.hists["response_matrix_u"].fill( dataset=dataset, 
-                                               ptreco=reco_jet.pt, ptgen=gen_jet.pt,
-                                               mreco=reco_jet.mass, mgen=gen_jet.mass )
+#             self.hists["response_matrix_u"].fill( dataset=dataset, 
+#                                                ptreco=reco_jet.pt, ptgen=gen_jet.pt,
+#                                                mreco=reco_jet.mass, mgen=gen_jet.mass )
+            
+            self.genjet_pt = np.append(self.genjet_pt, np.array(gen_jet.pt))
+            self.recojet_pt = np.append(self.recojet_pt, np.array(reco_jet.pt))
+            
             #self.hists["response_matrix_g"].fill( dataset=dataset, 
                                                #ptreco=reco_jet.pt, ptgen=gen_jet.pt,
                                                #mreco=reco_jet.msoftdrop, mgen=groomed_gen_jet.mass )
@@ -564,7 +421,7 @@ class QJetMassProcessor(processor.ProcessorABC):
         for name in sel.names:
             self.hists["cutflow"][dataset][name] = sel.all(name).sum()
         
-        return self.hists
+        return self.genjet_pt, self.recojet_pt
 
     
     def postprocess(self, accumulator):
